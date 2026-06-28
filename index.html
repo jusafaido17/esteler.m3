@@ -345,6 +345,7 @@ body{
   justify-content:center;
   font-size:28px;
   transition:.3s;
+  text-decoration:none;
 }
 
 .wa-float:hover{
@@ -511,8 +512,9 @@ footer p{
   <ul>
     <li><a href="#home">Home</a></li>
     <li><a href="#menu">Menu</a></li>
-    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#review">Review</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 
   <button class="btn" onclick="toggleCart()">
@@ -522,7 +524,8 @@ footer p{
 
 <!-- HERO -->
 <section class="hero" id="home">
-  <h1>ES TELER PREMIUM</h1>
+  <h1><span class="gold-text">ES TELER</span> PREMIUM
+</h1>
   <p>Porsi Melimpah • Harga Merakyat</p>
 </section>
 
@@ -534,9 +537,9 @@ footer p{
     <div class="card">
       <img src="esteler.png" alt="Es Teler">
       <div class="card-content">
-        <h3>Es Teler Biasa</h3>
+        <h3>Es Teler Original</h3>
         <p class="price">Rp 7.000</p>
-        <button class="btn" onclick="addToCart('Es Teler Biasa',7000)">Tambah</button>
+        <button class="btn" onclick="addToCart('Es Teler Original',7000)">Tambah</button>
       </div>
     </div>
 
@@ -580,13 +583,14 @@ footer p{
 </section>
 
 <!-- TENTANG -->
-<section id="tentang" class="container">
+<section id="about" class="container">
   <h2>Tentang Kami</h2>
   <div class="about">
     <div>
-      <p>Kami menyediakan es teler, es buah, jus buah, dan aneka macam pop ice segar dengan bahan berkualitas,
-        porsi puas, mulai harga Rp5000. Cocok dikonsumsi semua usia.</p>
-      <p>Segar, rasa premium, dan ramah di kantong!</p>
+      <p>Kami menyediakan Es Teler, Es Buah, Jus Buah, dan aneka macam Pop Ice segar dengan bahan berkualitas,
+        porsi puas, mulai harga Rp5.000.</p>
+      <p>Buah fresh, rasa premium, dan ramah di kantong.</p>
+      <p>Cocok dikonsumsi untuk semua usia!</p>
     </div>
 
     <div>
@@ -679,7 +683,7 @@ footer p{
   </a>
 </div>
 
-<section class="contact-section">
+<section id="contact" class="contact-section">
   <h2>Hubungi Kami</h2>
 
   <a href="https://wa.me/6285536530711" target="_blank" class="contact-btn">
@@ -942,6 +946,10 @@ window.submitReview = async function(){
     comment: comment || "-",
     rating:selectedRating,
     date:new Date().toLocaleDateString("id-ID"),
+    time:new Date().toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit"
+    }),
     createdAt: Date.now()
   });
 
@@ -990,7 +998,8 @@ async function renderReviews(){
         <div class="name">${review.name}</div>
         <div class="rating">${"★".repeat(review.rating)}${"☆".repeat(5-review.rating)}</div>
         <div>${review.comment}</div>
-        <div class="date">${review.date}</div>
+        <div class="date">
+          ${review.date}${review.time ? " • " + review.time : ""}</div>
       </div>
     `;
   });
