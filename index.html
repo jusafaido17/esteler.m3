@@ -566,7 +566,7 @@ footer p{
       <div class="card-content">
         <h3>Jus Buah</h3>
         <p class="price">Rp 7.000</p>
-        <button class="btn" onclick="addToCart('Jus Buah',7000)">Tambah</button>
+        <button class="btn" onclick="showJusMenu()">Tambah</button>
       </div>
     </div>
 
@@ -839,6 +839,60 @@ function sendWhatsApp(){
 
 renderCart();
 
+function showJusMenu(){
+
+  const flavors = [
+    "Alpukat",
+    "Jeruk",
+    "Mangga",
+    "Jambu",
+    "Melon",
+    "Semangka",
+    "Nanas",
+    "Apel",
+    "Buah Naga",
+    "Tomat",
+    "Wortel"
+  ];
+
+  let flavorList = "Pilih rasa Jus Buah:\n\n";
+
+  flavors.forEach((flavor,index)=>{
+    flavorList += `${index + 1}. ${flavor}\n`;
+  });
+
+  let choice = prompt(flavorList + "\nMasukkan nomor pilihan:");
+
+  if(choice === null) return;
+
+  let selectedIndex = parseInt(choice) - 1;
+
+  if(selectedIndex >= 0 && selectedIndex < flavors.length){
+
+    let itemName = `Jus ${flavors[selectedIndex]}`;
+
+    let item = cart.find(i => i.name === itemName);
+
+    if(item){
+      item.qty++;
+    }else{
+      cart.push({
+        name: itemName,
+        price: 7000,
+        qty: 1,
+        note: ""
+      });
+    }
+
+    saveCart();
+    toggleCart();
+
+  }else{
+    alert("Pilihan tidak valid!");
+  }
+
+}
+
 function showPopIceMenu(){
   const flavors = [
     "Coklat",
@@ -846,9 +900,11 @@ function showPopIceMenu(){
     "Strawberry",
     "Melon",
     "Mango",
-    "Alpukat",
+    "Avocado",
     "Durian",
-    "Taro"
+    "Taro",
+    "Permen Karet",
+    "Grape"
   ];
 
   let flavorList = "Pilih rasa Pop Ice:\n\n";
